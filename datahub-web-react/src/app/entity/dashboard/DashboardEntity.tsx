@@ -26,6 +26,7 @@ import { capitalizeFirstLetterOnly } from '../../shared/textUtil';
 import { DashboardStatsSummarySubHeader } from './profile/DashboardStatsSummarySubHeader';
 import { ChartSnippet } from '../chart/ChartSnippet';
 import { EmbedTab } from '../shared/tabs/Embed/EmbedTab';
+import ExtensionProfile from '../shared/extension/ExtensionProfile';
 
 /**
  * Definition of the DataHub Dashboard entity.
@@ -256,4 +257,13 @@ export class DashboardEntity implements Entity<Dashboard> {
             EntityCapabilityType.SOFT_DELETE,
         ]);
     };
+
+    renderExtensionProfile = (urn: string) => (
+        <ExtensionProfile
+            urn={urn}
+            entityType={EntityType.Dashboard}
+            useEntityQuery={useGetDashboardQuery}
+            getOverrideProperties={this.getOverridePropertiesFromEntity}
+        />
+    );
 }

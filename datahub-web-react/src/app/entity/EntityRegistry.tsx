@@ -99,6 +99,11 @@ export default class EntityRegistry {
         return entity.renderProfile(urn);
     }
 
+    renderExtensionProfile(type: EntityType, urn: string): JSX.Element {
+        const entity = validatedGet(type, this.entityTypeToEntity);
+        return entity.renderExtensionProfile ? entity.renderExtensionProfile(urn) : entity.renderProfile(urn);
+    }
+
     renderPreview<T>(entityType: EntityType, type: PreviewType, data: T): JSX.Element {
         const entity = validatedGet(entityType, this.entityTypeToEntity);
         return entity.renderPreview(type, data);
