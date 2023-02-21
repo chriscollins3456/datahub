@@ -459,6 +459,7 @@ module.exports = {
       "docs/sync-status",
       "docs/architecture/stemming_and_synonyms",
       "docs/lineage/lineage-feature-guide",
+      "docs/chrome-extension",
     ],
 
     "Join the Community": [
