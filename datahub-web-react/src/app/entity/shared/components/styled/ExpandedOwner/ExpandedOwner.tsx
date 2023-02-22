@@ -1,21 +1,12 @@
-import { message, Modal, Tag } from 'antd';
+import { message, Modal } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { useRemoveOwnerMutation } from '../../../../../../graphql/mutations.generated';
 import { EntityType, Owner } from '../../../../../../types.generated';
 import { useEntityRegistry } from '../../../../../useEntityRegistry';
 import analytics, { EventType, EntityActionType } from '../../../../../analytics';
 import { useEntityData } from '../../../EntityContext';
 import OwnerContent from './OwnerContent';
-
-const OwnerTag = styled(Tag)`
-    padding: 2px;
-    padding-right: 6px;
-    margin-bottom: 8px;
-    display: inline-flex;
-    align-items: center;
-`;
 
 type Props = {
     entityUrn?: string;
@@ -82,13 +73,31 @@ export const ExpandedOwner = ({ entityUrn, owner, hidePopOver, refetch, readOnly
     };
 
     return (
-        <OwnerTag onClose={onClose} closable={!!entityUrn && !readOnly}>
-            {readOnly && <OwnerContent name={name} owner={owner} hidePopOver={hidePopOver} pictureLink={pictureLink} />}
+        <>
+            {readOnly && (
+                <OwnerContent
+                    name={name}
+                    owner={owner}
+                    entityUrn={entityUrn}
+                    onClose={onClose}
+                    readOnly={readOnly}
+                    hidePopOver={hidePopOver}
+                    pictureLink={pictureLink}
+                />
+            )}
             {!readOnly && (
                 <Link to={entityRegistry.getEntityUrl(owner.owner.type, owner.owner.urn)}>
-                    <OwnerContent name={name} owner={owner} hidePopOver={hidePopOver} pictureLink={pictureLink} />
+                    <OwnerContent
+                        name={name}
+                        owner={owner}
+                        entityUrn={entityUrn}
+                        onClose={onClose}
+                        readOnly={readOnly}
+                        hidePopOver={hidePopOver}
+                        pictureLink={pictureLink}
+                    />
                 </Link>
             )}
-        </OwnerTag>
+        </>
     );
 };
